@@ -20,7 +20,7 @@ module.exports = {
     // Creates a application in the USER document
 
     createThought(req, res) {
-        Thought.create(req.body)
+        Thoughts.create(req.body)
             .then((thoughts) => {
                 return User.findOneAndUpdate(
                     { _id: req.body.userId },
@@ -42,7 +42,7 @@ module.exports = {
     },
 
     updateThought(req, res) {
-        Thought.findOneAndUpdate(
+        Thoughts.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $set: req.body },
             { runValidators: true, new: true }
@@ -59,7 +59,7 @@ module.exports = {
     },
     //  it will find the application by ID and delete the  application with that ID. 
     deleteThoughts(req, res) {
-        Thought.findOneAndRemove({ _id: req.params.thoughtId })
+        Thoughts.findOneAndRemove({ _id: req.params.thoughtId })
             .then((thought) =>
                 !thought
                     ? res.status(404).json({ message: 'No thought with this id!' })
